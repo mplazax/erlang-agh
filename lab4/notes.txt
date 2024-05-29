@@ -1,0 +1,20 @@
+podstawowy wzorzec serwera 
+
+start(Args) -> spawn(server, init, Args).
+
+init(Args) ->
+    State = initState(Args),
+    loop(State).
+
+loop(State) ->
+    recieve
+        {msg, Msg} ->
+            NewState = handle(Msg),
+            loop(NewState);
+        stop ->
+            terminate()
+    end. 
+
+terminate() ->
+    ok.
+
